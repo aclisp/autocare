@@ -20,13 +20,18 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@directus/sdk": "^19.1.0",
     "@mantine/core": "7.17.4",
     "@mantine/hooks": "7.17.4",
+    "@mantinex/mantine-logo": "^1.1.0",
     "@next/bundle-analyzer": "^15.2.3",
     "@tabler/icons-react": "^3.31.0",
-    "next": "15.2.3",
+    "client-only": "^0.0.1",
+    "next": "15.2.4",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "server-only": "^0.0.1",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
@@ -61,5 +66,5 @@
     "typescript": "5.8.2",
     "typescript-eslint": "^8.27.0"
   },
-  "packageManager": "yarn@4.8.1"
+  "packageManager": "pnpm@9.15.6"
 }
