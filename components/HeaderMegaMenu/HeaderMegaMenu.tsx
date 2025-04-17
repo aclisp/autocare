@@ -30,6 +30,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './HeaderMegaMenu.module.css';
+import Link from 'next/link';
 
 const mockdata = [
   {
@@ -154,7 +155,9 @@ export function HeaderMegaMenu() {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
+            <Button variant="default" component={Link} href="/login">
+              Log in
+            </Button>
             <Button>Sign up</Button>
           </Group>
 
@@ -200,7 +203,9 @@ export function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+            <Button variant="default" component={Link} href="/login">
+              Log in
+            </Button>
             <Button>Sign up</Button>
           </Group>
         </ScrollArea>
