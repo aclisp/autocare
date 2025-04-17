@@ -7,10 +7,19 @@ import {
   IconCode,
   IconCoin,
   IconFingerprint,
+  IconHeart,
+  IconLogout,
+  IconMessage,
   IconNotification,
+  IconPlayerPause,
+  IconSettings,
+  IconStar,
+  IconSwitchHorizontal,
+  IconTrash,
 } from '@tabler/icons-react';
 import {
   Anchor,
+  Avatar,
   Box,
   Burger,
   Button,
@@ -20,6 +29,7 @@ import {
   Drawer,
   Group,
   HoverCard,
+  Menu,
   ScrollArea,
   SimpleGrid,
   Text,
@@ -31,6 +41,12 @@ import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './HeaderMegaMenu.module.css';
 import Link from 'next/link';
+import cx from 'clsx';
+import { useState } from 'react';
+import { useUser } from '@/lib/directus/hooks';
+import type { User } from '@/lib/directus/types';
+import { DIRECTUS_URL } from '@/lib/directus/constants';
+import { directusClient } from '@/lib/directus/client-only';
 
 const mockdata = [
   {
@@ -93,11 +109,11 @@ export function HeaderMegaMenu() {
     <Box pb={16}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <MantineLogo size={30} />
+          <MantineLogo color="dark" size={30} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>
-              Home
+              Stores
             </a>
             <HoverCard
               width={600}
@@ -147,18 +163,15 @@ export function HeaderMegaMenu() {
               </HoverCard.Dropdown>
             </HoverCard>
             <a href="#" className={classes.link}>
-              Learn
+              Cart
             </a>
             <a href="#" className={classes.link}>
-              Academy
+              My
             </a>
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default" component={Link} href="/login">
-              Log in
-            </Button>
-            <Button>Sign up</Button>
+            <AuthInfo />
           </Group>
 
           <Burger
@@ -182,7 +195,7 @@ export function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
-            Home
+            Stores
           </a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
@@ -194,22 +207,144 @@ export function HeaderMegaMenu() {
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
-            Learn
+            Cart
           </a>
           <a href="#" className={classes.link}>
-            Academy
+            My
           </a>
 
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default" component={Link} href="/login">
-              Log in
-            </Button>
-            <Button>Sign up</Button>
+            <AuthInfo />
           </Group>
         </ScrollArea>
       </Drawer>
     </Box>
   );
+}
+
+function LoginButtons() {
+  return (
+    <>
+      <Button variant="default" component={Link} href="/login">
+        Log in
+      </Button>
+      <Button>Sign up</Button>
+    </>
+  );
+}
+
+function AuthenticatedUser({
+  user,
+  handleLogout,
+}: { user: User; handleLogout: React.MouseEventHandler<HTMLButtonElement> }) {
+  const theme = useMantineTheme();
+  const [userMenuOpened, setUserMenuOpened] = useState(false);
+  const userImage = `${DIRECTUS_URL}/assets/${user.avatar}`;
+
+  return (
+    <Menu
+      width={260}
+      position="bottom-end"
+      transitionProps={{ transition: 'pop-top-right' }}
+      onClose={() => setUserMenuOpened(false)}
+      onOpen={() => setUserMenuOpened(true)}
+      withinPortal={false}
+    >
+      <Menu.Target>
+        <UnstyledButton
+          className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
+        >
+          <Group gap={7}>
+            <Avatar
+              src={userImage}
+              alt={user.first_name}
+              radius="xl"
+              size={20}
+            />
+            <Text fw={500} size="sm" lh={1} mr={3}>
+              {user.first_name}
+            </Text>
+            <IconChevronDown size={12} stroke={1.5} />
+          </Group>
+        </UnstyledButton>
+      </Menu.Target>
+      <Menu.Dropdown>
+        {/* <Menu.Item
+          leftSection={
+            <IconHeart size={16} color={theme.colors.red[6]} stroke={1.5} />
+          }
+        >
+          Liked posts
+        </Menu.Item>
+        <Menu.Item
+          leftSection={
+            <IconStar size={16} color={theme.colors.yellow[6]} stroke={1.5} />
+          }
+        >
+          Saved posts
+        </Menu.Item>
+        <Menu.Item
+          leftSection={
+            <IconMessage size={16} color={theme.colors.blue[6]} stroke={1.5} />
+          }
+        >
+          Your comments
+        </Menu.Item> */}
+
+        <Menu.Label>Settings</Menu.Label>
+        <Menu.Item leftSection={<IconSettings size={16} stroke={1.5} />}>
+          Account settings
+        </Menu.Item>
+        <Menu.Item
+          leftSection={<IconSwitchHorizontal size={16} stroke={1.5} />}
+        >
+          Change account
+        </Menu.Item>
+        <Menu.Item
+          leftSection={<IconLogout size={16} stroke={1.5} />}
+          onClick={handleLogout}
+        >
+          Logout
+        </Menu.Item>
+
+        <Menu.Divider />
+
+        <Menu.Label>Danger zone</Menu.Label>
+        <Menu.Item leftSection={<IconPlayerPause size={16} stroke={1.5} />}>
+          Pause subscription
+        </Menu.Item>
+        <Menu.Item
+          color="red"
+          leftSection={<IconTrash size={16} stroke={1.5} />}
+        >
+          Delete account
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
+  );
+}
+
+function AuthInfo() {
+  const { user, error, isLoading } = useUser();
+  const [isLogout, setIsLogout] = useState(false);
+  const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async () => {
+    await directusClient.logout();
+    setIsLogout(true);
+  };
+
+  if (isLoading) {
+    return <></>;
+  }
+
+  if (error || isLogout) {
+    return <LoginButtons />;
+  }
+
+  if (user) {
+    return <AuthenticatedUser user={user} handleLogout={handleLogout} />;
+  }
+
+  return <></>;
 }

@@ -65,16 +65,16 @@ export function FooterLinks() {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          <MantineLogo size={30} />
+          <MantineLogo color="dark" size={30} />
           <Text size="xs" c="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+            Restore your car's brilliance faster than ever.
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2020 mantine.dev. All rights reserved.
+          © 2025 goldensands.app. All rights reserved.
         </Text>
 
         <Group

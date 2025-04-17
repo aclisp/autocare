@@ -17,8 +17,13 @@ import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import { GoogleButton } from './GoogleButton';
 import { TwitterButton } from './TwitterButton';
+import { directusClient } from '@/lib/directus/client-only';
+import { useRouter } from 'next/navigation';
+import { directusError } from '@/lib/directus';
+import { notifications } from '@mantine/notifications';
 
 export function AuthenticationForm(props: PaperProps) {
+  const router = useRouter();
   const [type, toggle] = useToggle(['login', 'register']);
   const form = useForm({
     initialValues: {
@@ -31,10 +36,25 @@ export function AuthenticationForm(props: PaperProps) {
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) =>
-        val.length <= 6
-          ? 'Password should include at least 6 characters'
-          : null,
+        val.length < 6 ? 'Password should include at least 6 characters' : null,
     },
+  });
+
+  const handleSubmit = form.onSubmit((values) => {
+    if (type === 'login') {
+      directusClient
+        .login(values.email, values.password)
+        .then(() => {
+          router.push('/');
+        })
+        .catch((error) => {
+          notifications.show({
+            color: 'red',
+            title: 'Login failed',
+            message: directusError(error),
+          });
+        });
+    }
   });
 
   return (
@@ -50,7 +70,7 @@ export function AuthenticationForm(props: PaperProps) {
 
       <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-      <form onSubmit={form.onSubmit(() => {})}>
+      <form onSubmit={handleSubmit}>
         <Stack>
           {type === 'register' && (
             <TextInput
