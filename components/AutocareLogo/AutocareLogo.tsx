@@ -2,6 +2,7 @@ import { Group, Text } from '@mantine/core';
 import { IconCarGarage } from '@tabler/icons-react';
 
 export function AutocareLogo({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   color,
   size,
 }: { color?: string; size?: number }) {

@@ -2,20 +2,21 @@
 
 import {
   IconBook,
+  IconBuildingStore,
   IconChartPie3,
   IconChevronDown,
   IconCode,
   IconCoin,
   IconFingerprint,
-  IconHeart,
+  IconFolderStar,
   IconLogout,
-  IconMessage,
   IconNotification,
   IconPlayerPause,
   IconSettings,
-  IconStar,
+  IconShoppingCart,
   IconSwitchHorizontal,
   IconTrash,
+  IconUserCircle,
 } from '@tabler/icons-react';
 import {
   Anchor,
@@ -195,22 +196,34 @@ export function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
-            Stores
+            <Group gap="xs">
+              <IconBuildingStore />
+              Stores
+            </Group>
           </a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
-                Features
+                <Group gap="xs">
+                  <IconFolderStar />
+                  Features
+                </Group>
               </Box>
               <IconChevronDown size={16} color={theme.colors.blue[6]} />
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
-            Cart
+            <Group gap="xs">
+              <IconShoppingCart />
+              Cart
+            </Group>
           </a>
           <a href="#" className={classes.link}>
-            My
+            <Group gap="xs">
+              <IconUserCircle />
+              My
+            </Group>
           </a>
 
           <Divider my="sm" />
@@ -239,7 +252,6 @@ function AuthenticatedUser({
   user,
   handleLogout,
 }: { user: User; handleLogout: React.MouseEventHandler<HTMLButtonElement> }) {
-  const theme = useMantineTheme();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const userImage = `${DIRECTUS_URL}/assets/${user.avatar}`;
 
@@ -261,7 +273,7 @@ function AuthenticatedUser({
               src={userImage}
               alt={user.first_name}
               radius="xl"
-              size={20}
+              size={30}
             />
             <Text fw={500} size="sm" lh={1} mr={3}>
               {user.first_name}

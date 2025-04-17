@@ -41,9 +41,9 @@ const data = [
 
 export function FooterLinks() {
   const groups = data.map((group) => {
-    const links = group.links.map((link, index) => (
+    const links = group.links.map((link) => (
       <Text<'a'>
-        key={index}
+        key={link.label}
         className={classes.link}
         component="a"
         href={link.link}

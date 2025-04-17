@@ -32,6 +32,7 @@
     "rules": {
       "recommended": true,
       "a11y": {
+        "useValidAnchor": "info",
         "useHtmlLang": "warn", // Not in recommended ruleset, turning on manually
         "noHeaderScope": "warn", // Not in recommended ruleset, turning on manually
         "useValidAriaRole": {
