@@ -26,7 +26,6 @@
     "@mantine/hooks": "7.17.4",
     "@mantine/notifications": "^7.17.4",
     "@mantinex/dev-icons": "^1.1.0",
-    "@mantinex/mantine-logo": "^1.1.0",
     "@next/bundle-analyzer": "^15.2.3",
     "@tabler/icons-react": "^3.31.0",
     "client-only": "^0.0.1",

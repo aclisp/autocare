@@ -26,9 +26,6 @@ importers:
       '@mantinex/dev-icons':
         specifier: ^1.1.0
         version: 1.1.0(@mantine/core@7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@mantine/hooks@7.17.4(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@mantinex/mantine-logo':
-        specifier: ^1.1.0
-        version: 1.1.0(@mantine/core@7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@mantine/hooks@7.17.4(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/bundle-analyzer':
         specifier: ^15.2.3
         version: 15.3.0
@@ -1300,14 +1297,6 @@ packages:
 
   '@mantinex/dev-icons@1.1.0':
     resolution: {integrity: sha512-ovve4xpjhBA29CIxwnTvIi6pJ7jWJftBFHiI2AAj79MGaVxteuj4o7G1j4gK0+b5U770vceXUVAKAwVBDTa5Aw==}
-    peerDependencies:
-      '@mantine/core': '>=7.0.0'
-      '@mantine/hooks': '>=7.0.0'
-      react: ^18.x || ^19.x
-      react-dom: ^18.x || ^19.x
-
-  '@mantinex/mantine-logo@1.1.0':
-    resolution: {integrity: sha512-POR8TKKl7p1uq4nl/DxH3wBW7ShTVEEkzZ9RUkTbwjfuHR/skjaK2to8aETkxmpl/u2vQyxb325WwDKe5Xby5A==}
     peerDependencies:
       '@mantine/core': '>=7.0.0'
       '@mantine/hooks': '>=7.0.0'
@@ -6430,13 +6419,6 @@ snapshots:
       react: 19.0.0
 
   '@mantinex/dev-icons@1.1.0(@mantine/core@7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@mantine/hooks@7.17.4(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
-    dependencies:
-      '@mantine/core': 7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@mantine/hooks': 7.17.4(react@19.0.0)
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-
-  '@mantinex/mantine-logo@1.1.0(@mantine/core@7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@mantine/hooks@7.17.4(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@mantine/core': 7.17.4(@mantine/hooks@7.17.4(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mantine/hooks': 7.17.4(react@19.0.0)

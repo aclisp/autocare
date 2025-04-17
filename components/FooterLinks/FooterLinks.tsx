@@ -6,7 +6,7 @@ import {
   IconBrandYoutube,
 } from '@tabler/icons-react';
 import { ActionIcon, Container, Group, Text } from '@mantine/core';
-import { MantineLogo } from '@mantinex/mantine-logo';
+import { AutocareLogo } from '@/components/AutocareLogo/AutocareLogo';
 import classes from './FooterLinks.module.css';
 
 const data = [
@@ -65,7 +65,7 @@ export function FooterLinks() {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          <MantineLogo color="dark" size={30} />
+          <AutocareLogo color="dark" size={30} />
           <Text size="xs" c="dimmed" className={classes.description}>
             Restore your car's brilliance faster than ever.
           </Text>

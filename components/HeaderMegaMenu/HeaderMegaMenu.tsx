@@ -38,7 +38,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
+import { AutocareLogo } from '@/components/AutocareLogo/AutocareLogo';
 import classes from './HeaderMegaMenu.module.css';
 import Link from 'next/link';
 import cx from 'clsx';
@@ -109,7 +109,7 @@ export function HeaderMegaMenu() {
     <Box pb={16}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <MantineLogo color="dark" size={30} />
+          <AutocareLogo color="dark" size={30} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>
