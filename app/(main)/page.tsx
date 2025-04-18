@@ -1,9 +1,19 @@
-import { Container, Title } from '@mantine/core';
+import { ManageCar } from '@/components/ManageCar/ManageCar';
+import { NearbyStores } from '@/components/NearbyStores/NearbyStores';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
+import { ServicesGrid } from '@/components/ServicesGrid/ServicesGrid';
+import { Container, Stack, Title } from '@mantine/core';
 
 export default function Home() {
   return (
     <Container>
-      <Title order={1}>This is h1 title</Title>
+      <Stack gap="md">
+        <Title order={3}>养车来金沙，有保障，更专业！</Title>
+        <SearchBar />
+        <ManageCar />
+        <NearbyStores />
+        <ServicesGrid />
+      </Stack>
     </Container>
   );
 }

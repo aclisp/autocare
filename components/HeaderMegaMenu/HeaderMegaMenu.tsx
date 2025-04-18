@@ -48,6 +48,7 @@ import { useUser } from '@/lib/directus/hooks';
 import type { User } from '@/lib/directus/types';
 import { DIRECTUS_URL } from '@/lib/directus/constants';
 import { directusClient } from '@/lib/directus/client-only';
+import { usePathname, useRouter } from 'next/navigation';
 
 const mockdata = [
   {
@@ -339,11 +340,16 @@ function AuthenticatedUser({
 }
 
 function AuthInfo() {
+  const router = useRouter();
+  const pathname = usePathname();
   const { user, error, isLoading } = useUser();
   const [isLogout, setIsLogout] = useState(false);
   const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async () => {
     await directusClient.logout();
     setIsLogout(true);
+    if (pathname !== '/') {
+      router.push('/');
+    }
   };
 
   if (isLoading) {

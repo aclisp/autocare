@@ -5,10 +5,14 @@ import { directusError } from '.';
 import type { User } from './types';
 
 export function useUser() {
-  const { data, error, isLoading } = useSWR<User>('/users/me', async () => {
-    const response = await directusClient.request<User>(readMe());
-    return response;
-  });
+  const { data, error, isLoading } = useSWR<User>(
+    '/users/me',
+    async () => {
+      const response = await directusClient.request<User>(readMe());
+      return response;
+    },
+    { shouldRetryOnError: false },
+  );
   return {
     user: data,
     error: directusError(error),
