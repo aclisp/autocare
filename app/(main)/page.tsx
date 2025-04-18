@@ -8,7 +8,9 @@ export default function Home() {
   return (
     <Container>
       <Stack gap="md">
-        <Title order={3}>养车来金沙，有保障，更专业！</Title>
+        <Title order={3}>
+          Maintain your car at Golden Sands — more reliable, more professional!
+        </Title>
         <SearchBar />
         <ManageCar />
         <NearbyStores />

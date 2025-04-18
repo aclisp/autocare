@@ -25,7 +25,7 @@ export function NearbyStores() {
     <Card withBorder padding="lg" className={classes.card}>
       <Card.Section>
         <Image
-          src="https://d3ntj9qzvonbya.cloudfront.net/system/dealer_accounts/85/hero_images/original/Napa_Car_Care_HERO_copy.png"
+          src="https://dancingcat.top/assets/337d1e67-34b7-4fda-8feb-6e3facd69fac"
           alt="Nearby Stores"
           height={100}
         />

@@ -111,7 +111,9 @@ export function HeaderMegaMenu() {
     <Box pb={16}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <AutocareLogo color="dark" size={30} />
+          <Anchor component={Link} href="/">
+            <AutocareLogo color="dark" size={30} />
+          </Anchor>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>

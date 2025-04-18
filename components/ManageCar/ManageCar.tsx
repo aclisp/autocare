@@ -8,7 +8,7 @@ export function ManageCar() {
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src="https://i.imgur.com/ZL52Q2D.png"
+          src="https://dancingcat.top/assets/cfb43b9d-3e25-46c0-9dc2-ca054f62a89f"
           height={160}
           alt="Norway"
         />
@@ -26,7 +26,6 @@ export function ManageCar() {
 
       <Button
         component={Link}
-        color="blue"
         fullWidth
         mt="md"
         radius="md"
