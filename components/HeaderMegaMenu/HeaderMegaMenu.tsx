@@ -52,27 +52,27 @@ import { directusClient } from '@/lib/directus/client-only';
 const mockdata = [
   {
     icon: IconCode,
-    title: 'Open source',
+    title: 'MAINTAIN 保养',
     description: 'This Pokémon’s cry is very loud and distracting',
   },
   {
     icon: IconCoin,
-    title: 'Free for everyone',
+    title: 'CAR BEAUTY 洗车美容',
     description: 'The fluid of Smeargle’s tail secretions changes',
   },
   {
     icon: IconBook,
-    title: 'Documentation',
+    title: 'LOCATION 四轮定位',
     description: 'Yanma is capable of seeing 360 degrees without',
   },
   {
     icon: IconFingerprint,
-    title: 'Security',
+    title: 'WAX 打蜡',
     description: 'The shell’s rounded shape and the grooves on its.',
   },
   {
     icon: IconChartPie3,
-    title: 'Analytics',
+    title: 'CLEANING INLET 清洗进气道',
     description: 'This Pokémon uses its flying ability to quickly chase',
   },
   {
@@ -127,7 +127,7 @@ export function HeaderMegaMenu() {
                 <a href="#" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Features
+                      Services
                     </Box>
                     <IconChevronDown size={16} color={theme.colors.blue[6]} />
                   </Center>
@@ -136,7 +136,7 @@ export function HeaderMegaMenu() {
 
               <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
-                  <Text fw={500}>Features</Text>
+                  <Text fw={500}>Services</Text>
                   <Anchor href="#" fz="xs">
                     View all
                   </Anchor>
@@ -206,7 +206,7 @@ export function HeaderMegaMenu() {
               <Box component="span" mr={5}>
                 <Group gap="xs">
                   <IconFolderStar />
-                  Features
+                  Services
                 </Group>
               </Box>
               <IconChevronDown size={16} color={theme.colors.blue[6]} />
