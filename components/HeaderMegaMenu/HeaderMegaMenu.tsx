@@ -246,7 +246,7 @@ function LoginButtons() {
       <Button variant="default" component={Link} href="/login">
         Log in
       </Button>
-      <Button>Sign up</Button>
+      {/* <Button>Sign up</Button> */}
     </>
   );
 }

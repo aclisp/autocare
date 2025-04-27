@@ -1,10 +1,10 @@
 import { Container } from '@mantine/core';
-import { AuthenticationForm } from './AuthenticationForm';
+import { SignInWithGoogle } from './SignInWithGoogle';
 
 export default function LoginPage() {
   return (
     <Container mt={60} size="xs">
-      <AuthenticationForm />
+      <SignInWithGoogle />
     </Container>
   );
 }
