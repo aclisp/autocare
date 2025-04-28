@@ -16,7 +16,6 @@ const providerOptions: OAuthUserConfig<any> = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 };
 if (process.env.https_proxy) {
-  console.info('Using https_proxy:', process.env.https_proxy);
   providerOptions[customFetch] = proxy;
 }
 
@@ -26,7 +25,8 @@ const authOptions: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
   callbacks: {
     signIn({ profile }) {
-      console.log(' *** profile', profile);
+      // eslint-disable-next-line no-console
+      console.debug('[NextAuthConfig.callbacks.signIn] Got profile', profile);
       return true;
     },
   },

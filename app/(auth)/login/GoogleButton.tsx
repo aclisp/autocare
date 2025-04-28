@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@mantine/core';
+import { Button } from '@mantine/core';
 
 function GoogleIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -29,8 +29,6 @@ function GoogleIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function GoogleButton(
-  props: ButtonProps & React.ComponentPropsWithoutRef<'button'>,
-) {
+export function GoogleButton(props: any) {
   return <Button leftSection={<GoogleIcon />} variant="default" {...props} />;
 }
