@@ -15,8 +15,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
-import { GoogleButton } from './GoogleButton';
-import { TwitterButton } from './TwitterButton';
+import { GoogleButton } from '@/components/GoogleButton/GoogleButton';
+import { TwitterButton } from '@/components/TwitterButton/TwitterButton';
 import { directusClient } from '@/lib/directus/client-only';
 import { useRouter } from 'next/navigation';
 import { directusError } from '@/lib/directus';

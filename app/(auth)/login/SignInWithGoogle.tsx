@@ -1,12 +1,10 @@
 'use client';
 
 import { Flex, Title } from '@mantine/core';
-import { GoogleButton } from './GoogleButton';
-import Link from 'next/link';
+import { GoogleButton } from '@/components/GoogleButton/GoogleButton';
 import { DIRECTUS_URL } from '@/lib/directus/constants';
+import { SITE_URL } from '@/lib/constants';
 import { IconCarFilled } from '@tabler/icons-react';
-
-const URL = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
 export function SignInWithGoogle() {
   return (
@@ -17,8 +15,7 @@ export function SignInWithGoogle() {
       </Title>
       <GoogleButton
         radius="xl"
-        component={Link}
-        href={`${DIRECTUS_URL}/auth/login/google?redirect=${URL}/login/seamless`}
+        href={`${DIRECTUS_URL}/auth/login/google?redirect=${SITE_URL}/login/seamless`}
       >
         Sign In with Google
       </GoogleButton>

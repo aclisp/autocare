@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@mantine/core';
+import { Button, type ButtonProps } from '@mantine/core';
 import { TwitterIcon } from '@mantinex/dev-icons';
 
 export function TwitterButton(

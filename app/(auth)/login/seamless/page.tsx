@@ -41,7 +41,7 @@ function SeamlessLoginError({ error }: { error: string }) {
   return (
     <Alert variant="light" color="red" title="Login failed" icon={icon}>
       {error}
-      <Flex justify="flex-end" mt="md">
+      <Flex justify="end" mt="md">
         <Button variant="default" radius="xl" component={Link} href="/login">
           Try Again
         </Button>

@@ -1,7 +1,8 @@
 import { directusError } from '@/lib/directus';
-import { Container, Stack, Text, Group, Anchor } from '@mantine/core';
-import { IconHandFingerRight } from '@tabler/icons-react';
-import Link from 'next/link';
+import { Container, Stack, Text } from '@mantine/core';
+import { GoogleButton } from '@/components/GoogleButton/GoogleButton';
+import { DIRECTUS_URL } from '@/lib/directus/constants';
+import { SITE_URL } from '@/lib/constants';
 
 export function RequireLogin({
   error,
@@ -9,15 +10,15 @@ export function RequireLogin({
 }: { error: unknown; hint: string }) {
   return (
     <Container>
-      <Stack gap="md">
+      <Stack align="start" gap="md">
         <Text>{directusError(error)}</Text>
-        <Group gap="xs">
-          <IconHandFingerRight />
-          <Anchor underline="always" component={Link} href="/login">
-            Login
-          </Anchor>{' '}
-          {hint}
-        </Group>
+        <Text>{`Login ${hint}`}</Text>
+        <GoogleButton
+          radius="xl"
+          href={`${DIRECTUS_URL}/auth/login/google?redirect=${SITE_URL}/login/seamless`}
+        >
+          Sign In with Google
+        </GoogleButton>
       </Stack>
     </Container>
   );
