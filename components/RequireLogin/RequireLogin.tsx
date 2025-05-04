@@ -10,9 +10,9 @@ export function RequireLogin({
 }: { error: unknown; hint: string }) {
   return (
     <Container>
-      <Stack align="start" gap="md">
-        <Text>{directusError(error)}</Text>
-        <Text>{`Login ${hint}`}</Text>
+      <Stack align="center" gap="md">
+        <Text size="xs">{directusError(error)}</Text>
+        <Text mt="md" mb="xl">{`Login ${hint}`}</Text>
         <GoogleButton
           radius="xl"
           href={`${DIRECTUS_URL}/auth/login/google?redirect=${SITE_URL}/login/seamless`}
