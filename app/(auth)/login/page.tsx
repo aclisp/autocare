@@ -3,7 +3,7 @@ import { SignInWithGoogle } from './SignInWithGoogle';
 
 export default function LoginPage() {
   return (
-    <Container mt={60} size="xs">
+    <Container mt={76} size="xs">
       <SignInWithGoogle />
     </Container>
   );
