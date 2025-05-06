@@ -44,7 +44,7 @@ import classes from './HeaderMegaMenu.module.css';
 import Link from 'next/link';
 import cx from 'clsx';
 import { useState } from 'react';
-import { useCurrentUser, type User } from '@/lib/directus/hooks';
+import { useUser, type User } from '@/lib/directus/hooks';
 import { DIRECTUS_URL } from '@/lib/directus/constants';
 import { directusClient } from '@/lib/directus/client-only';
 import { usePathname, useRouter } from 'next/navigation';
@@ -346,7 +346,7 @@ function AuthenticatedUser({
 function AuthInfo() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, error, isLoading } = useCurrentUser();
+  const { user, error, isLoading } = useUser();
   const [isLogout, setIsLogout] = useState(false);
   const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async () => {
     await directusClient.logout();

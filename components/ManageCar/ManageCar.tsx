@@ -1,29 +1,23 @@
 'use client';
 
+import { type UserVehicle, useUserVehicles } from '@/lib/directus/hooks';
 import { Card, Image, Group, Text, Badge, Button } from '@mantine/core';
 import Link from 'next/link';
+import { Loading } from '../Loading/Loading';
+import { DIRECTUS_URL } from '@/lib/directus/constants';
 
 export function ManageCar() {
+  const { items, /*error,*/ isLoading } = useUserVehicles();
+  if (isLoading) {
+    return <Loading />;
+  }
+  // if (error) {
+  //   return <></>;
+  // }
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Card.Section>
-        <Image
-          src="https://dancingcat.top/assets/cfb43b9d-3e25-46c0-9dc2-ca054f62a89f"
-          height={160}
-          alt="Norway"
-        />
-      </Card.Section>
-
-      <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>Tesla Model S</Text>
-        <Badge color="pink">粤X00001</Badge>
-      </Group>
-
-      <Text size="sm" c="dimmed">
-        With Fjord Tours you can explore more of the magical fjord landscapes
-        with tours and activities on and around the fjords of Norway
-      </Text>
-
+      <Car items={items} />
       <Button
         component={Link}
         fullWidth
@@ -31,8 +25,45 @@ export function ManageCar() {
         radius="md"
         href="/manage-cars"
       >
-        Manage My Cars
+        {!items || items.length === 0 ? 'Add My Car' : 'Manage My Cars'}
       </Button>
     </Card>
+  );
+}
+
+function Car({ items }: { items?: UserVehicle[] }) {
+  if (!items || items.length === 0) {
+    return (
+      <>
+        <Text size="sm" c="dimmed">
+          We accurately recommend products based on your vehicle information.
+        </Text>
+      </>
+    );
+  }
+
+  const randomIndex = Math.floor(Math.random() * items.length);
+  const item = items[randomIndex];
+  const image = `${DIRECTUS_URL}/assets/${item.primary_image}`;
+  let title = `${item.model ?? ''}`;
+  if (item.make) {
+    title = `${item.make} ${title}`;
+  }
+  return (
+    <>
+      <Card.Section>
+        <Image src={image} height={160} alt="Norway" />
+      </Card.Section>
+
+      <Group justify="space-between" mt="md" mb="xs">
+        <Text fw={500}>{title}</Text>
+        <Badge color="pink">{item.license_plate}</Badge>
+      </Group>
+
+      <Text size="sm" c="dimmed">
+        Driven {item.mileage ?? '---'} km, last serviced on{' '}
+        {item.last_service_date ?? '---'}.
+      </Text>
+    </>
   );
 }
