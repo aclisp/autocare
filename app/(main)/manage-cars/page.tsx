@@ -2,11 +2,11 @@
 
 import { Container, ScrollArea, Title } from '@mantine/core';
 import { RequireLogin } from '@/components/RequireLogin/RequireLogin';
-import { useUser } from '@/lib/directus/hooks';
+import { useItems } from '@/lib/directus/hooks';
 import { Loading } from '@/components/Loading/Loading';
 
 export default function ManageCars() {
-  const { user, error, isLoading } = useUser();
+  const { items, error, isLoading } = useItems('user_vehicles');
   if (isLoading) {
     return <Loading />;
   }
@@ -18,7 +18,7 @@ export default function ManageCars() {
     <Container>
       <Title order={4}>Manage my cars</Title>
       <ScrollArea>
-        <pre>{JSON.stringify(user, null, 2)}</pre>
+        <pre>{JSON.stringify(items, null, 2)}</pre>
       </ScrollArea>
     </Container>
   );

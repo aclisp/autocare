@@ -44,8 +44,7 @@ import classes from './HeaderMegaMenu.module.css';
 import Link from 'next/link';
 import cx from 'clsx';
 import { useState } from 'react';
-import { useUser } from '@/lib/directus/hooks';
-import type { User } from '@/lib/directus/types';
+import { useCurrentUser, type User } from '@/lib/directus/hooks';
 import { DIRECTUS_URL } from '@/lib/directus/constants';
 import { directusClient } from '@/lib/directus/client-only';
 import { usePathname, useRouter } from 'next/navigation';
@@ -254,7 +253,10 @@ function LoginButtons() {
 function AuthenticatedUser({
   user,
   handleLogout,
-}: { user: User; handleLogout: React.MouseEventHandler<HTMLButtonElement> }) {
+}: {
+  user: User;
+  handleLogout: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const userImage = `${DIRECTUS_URL}/assets/${user.avatar}`;
 
@@ -274,7 +276,7 @@ function AuthenticatedUser({
           <Group gap={7}>
             <Avatar
               src={userImage}
-              alt={user.first_name}
+              alt={user.first_name ?? ''}
               radius="xl"
               size={30}
             />
@@ -344,7 +346,7 @@ function AuthenticatedUser({
 function AuthInfo() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, error, isLoading } = useUser();
+  const { user, error, isLoading } = useCurrentUser();
   const [isLogout, setIsLogout] = useState(false);
   const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async () => {
     await directusClient.logout();
