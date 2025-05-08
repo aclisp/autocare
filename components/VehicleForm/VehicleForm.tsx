@@ -96,6 +96,10 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
     initialValues: initializeValues(item),
     transformValues: (values) => ({
       ...values,
+      license_plate: values.license_plate?.trim(),
+      make: values.make?.trim(),
+      model: values.model?.trim(),
+      vin: values.vin?.trim(),
       year: format(values.year, 'YYYY'),
       last_service_date: format(values.last_service_date, 'YYYY-MM-DD'),
       next_service_due_date: format(values.next_service_due_date, 'YYYY-MM-DD'),
