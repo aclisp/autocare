@@ -4,7 +4,7 @@ import { type UserVehicle, useUserVehicles } from '@/lib/directus/hooks';
 import { Card, Image, Group, Text, Badge, Button } from '@mantine/core';
 import Link from 'next/link';
 import { Loading } from '../Loading/Loading';
-import { DIRECTUS_URL } from '@/lib/directus/constants';
+import { directusAsset } from '@/lib/directus';
 
 export function ManageCar() {
   const { items, /*error,*/ isLoading } = useUserVehicles();
@@ -18,15 +18,6 @@ export function ManageCar() {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Car items={items} />
-      <Button
-        component={Link}
-        fullWidth
-        mt="md"
-        radius="md"
-        href="/manage-cars"
-      >
-        {!items || items.length === 0 ? 'Add My Car' : 'Manage My Cars'}
-      </Button>
     </Card>
   );
 }
@@ -38,13 +29,22 @@ function Car({ items }: { items?: UserVehicle[] }) {
         <Text size="sm" c="dimmed">
           We accurately recommend products based on your vehicle information.
         </Text>
+
+        <Button
+          component={Link}
+          fullWidth
+          mt="md"
+          radius="md"
+          href="/manage-cars/create"
+        >
+          Add My Car
+        </Button>
       </>
     );
   }
 
   const randomIndex = Math.floor(Math.random() * items.length);
   const item = items[randomIndex];
-  const image = `${DIRECTUS_URL}/assets/${item.primary_image}`;
   let title = `${item.model ?? ''}`;
   if (item.make) {
     title = `${item.make} ${title}`;
@@ -52,7 +52,11 @@ function Car({ items }: { items?: UserVehicle[] }) {
   return (
     <>
       <Card.Section>
-        <Image src={image} height={160} alt="Norway" />
+        <Image
+          src={directusAsset(item.primary_image)}
+          h={{ base: 160, sm: 250 }}
+          alt="My Car"
+        />
       </Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">
@@ -64,6 +68,16 @@ function Car({ items }: { items?: UserVehicle[] }) {
         Driven {item.mileage ?? '---'} km, last serviced on{' '}
         {item.last_service_date ?? '---'}.
       </Text>
+
+      <Button
+        component={Link}
+        fullWidth
+        mt="md"
+        radius="md"
+        href="/manage-cars"
+      >
+        Manage My Cars
+      </Button>
     </>
   );
 }

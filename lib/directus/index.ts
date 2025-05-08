@@ -1,4 +1,5 @@
 import { isDirectusError } from '@directus/sdk';
+import { DIRECTUS_URL } from './constants';
 
 export function directusError(e: unknown): string | undefined {
   if (e === null || e === undefined) {
@@ -25,4 +26,8 @@ function isError(value: unknown): value is Error {
     'message' in value;
 
   return isError;
+}
+
+export function directusAsset(fileId: string) {
+  return `${DIRECTUS_URL}/assets/${fileId}`;
 }

@@ -8,12 +8,16 @@ import {
   AspectRatio,
   Image,
   SimpleGrid,
+  Group,
+  ActionIcon,
 } from '@mantine/core';
 import { RequireLogin } from '@/components/RequireLogin/RequireLogin';
 import { type UserVehicle, useUserVehicles } from '@/lib/directus/hooks';
 import { Loading } from '@/components/Loading/Loading';
-import { DIRECTUS_URL } from '@/lib/directus/constants';
 import classes from './page.module.css';
+import Link from 'next/link';
+import { IconPlus } from '@tabler/icons-react';
+import { directusAsset } from '@/lib/directus';
 
 export default function ManageCars() {
   const { items, error, isLoading } = useUserVehicles();
@@ -27,6 +31,17 @@ export default function ManageCars() {
   return (
     <Container>
       <Title order={4}>Manage my cars</Title>
+      <Group justify="end" mx="xl">
+        <ActionIcon
+          size={44}
+          variant="filled"
+          radius="xl"
+          component={Link}
+          href="/manage-cars/create"
+        >
+          <IconPlus />
+        </ActionIcon>
+      </Group>
       <CarsCardsGrid items={items} />
     </Container>
   );
@@ -34,7 +49,6 @@ export default function ManageCars() {
 
 function CarsCardsGrid({ items }: { items?: UserVehicle[] }) {
   const cards = items?.map((item) => {
-    const image = `${DIRECTUS_URL}/assets/${item.primary_image}`;
     let title = `${item.model ?? ''}`;
     if (item.make) {
       title = `${item.make} ${title}`;
@@ -44,12 +58,12 @@ function CarsCardsGrid({ items }: { items?: UserVehicle[] }) {
         key={item.id}
         p="md"
         radius="md"
-        component="a"
-        href="#"
+        component={Link}
+        href={`/manage-cars/${item.id}`}
         className={classes.card}
       >
         <AspectRatio ratio={1920 / 1080}>
-          <Image src={image} radius="md" />
+          <Image src={directusAsset(item.primary_image)} radius="md" />
         </AspectRatio>
         <Text className={classes.date}>{item.license_plate}</Text>
         <Text className={classes.title}>{title}</Text>

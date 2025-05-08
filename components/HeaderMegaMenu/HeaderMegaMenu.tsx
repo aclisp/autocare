@@ -45,9 +45,10 @@ import Link from 'next/link';
 import cx from 'clsx';
 import { useState } from 'react';
 import { useUser, type User } from '@/lib/directus/hooks';
-import { DIRECTUS_URL } from '@/lib/directus/constants';
 import { directusClient } from '@/lib/directus/client-only';
 import { usePathname, useRouter } from 'next/navigation';
+import { useSWRConfig } from 'swr';
+import { directusAsset } from '@/lib/directus';
 
 const mockdata = [
   {
@@ -194,7 +195,7 @@ export function HeaderMegaMenu() {
         hiddenFrom="sm"
         zIndex={1000000}
       >
-        <ScrollArea h="calc(100vh - 80px" mx="-md">
+        <ScrollArea h="calc(100vh - 80px)" mx="-md">
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
@@ -258,7 +259,6 @@ function AuthenticatedUser({
   handleLogout: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
-  const userImage = `${DIRECTUS_URL}/assets/${user.avatar}`;
 
   return (
     <Menu
@@ -275,7 +275,7 @@ function AuthenticatedUser({
         >
           <Group gap={7}>
             <Avatar
-              src={userImage}
+              src={directusAsset(user.avatar as string)}
               alt={user.first_name ?? ''}
               radius="xl"
               size={30}
@@ -347,10 +347,11 @@ function AuthInfo() {
   const router = useRouter();
   const pathname = usePathname();
   const { user, error, isLoading } = useUser();
-  const [isLogout, setIsLogout] = useState(false);
+  const { mutate } = useSWRConfig();
   const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async () => {
     await directusClient.logout();
-    setIsLogout(true);
+    mutate('/users/me', null);
+    mutate('/list/items/user_vehicles', null);
     if (pathname !== '/') {
       router.push('/');
     }
@@ -360,7 +361,7 @@ function AuthInfo() {
     return <></>;
   }
 
-  if (error || isLogout) {
+  if (error) {
     return <LoginButtons />;
   }
 

@@ -27,7 +27,7 @@ export function NearbyStores() {
         <Image
           src="https://dancingcat.top/assets/337d1e67-34b7-4fda-8feb-6e3facd69fac"
           alt="Nearby Stores"
-          height={100}
+          h={{ base: 250, sm: 400 }}
         />
       </Card.Section>
 

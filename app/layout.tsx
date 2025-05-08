@@ -1,5 +1,7 @@
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dropzone/styles.css';
+import '@mantine/dates/styles.css';
 
 import React from 'react';
 import {
@@ -7,6 +9,7 @@ import {
   mantineHtmlProps,
   MantineProvider,
 } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { theme } from '../theme';
 import type { Metadata } from 'next';
@@ -31,8 +34,10 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <Notifications />
-          {children}
+          <ModalsProvider>
+            <Notifications />
+            {children}
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>

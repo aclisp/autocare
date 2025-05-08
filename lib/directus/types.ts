@@ -11,6 +11,7 @@ export interface Schema {
   auto_service_stores: AutoServiceStore[];
   service_offerings: ServiceOffering[];
   technicians: Technician[];
+  vehicle_owners: VehicleOwner[];
 }
 
 export interface Inventory extends EntityShared {
@@ -113,7 +114,7 @@ export interface UserVehicle extends EntityShared {
   owners: number[] | VehicleOwner[];
 }
 
-interface VehicleOwner {
+export interface VehicleOwner {
   id: number;
   vehicle: string | UserVehicle;
   user: string | DirectusUser<Schema>;
