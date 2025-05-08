@@ -36,7 +36,7 @@ import { format, parse } from '@/lib/form';
 import { useRouter } from 'next/navigation';
 import { modals } from '@mantine/modals';
 import type { VehicleOwner } from '@/lib/directus/types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function VehicleFormNew() {
   const { user, error, isLoading } = useUser();
@@ -153,6 +153,8 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
     router.push('/manage-cars');
   });
 
+  const [uploading, setUploading] = useState(false);
+
   const handleImageUpload = async (files: FileWithPath[]) => {
     const formData = new FormData();
     formData.append(
@@ -160,7 +162,9 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
       '9870ada8-9da3-41bd-9a1b-2adf44620697' /* It's the `Staff` folder */,
     );
     formData.append('file', files[0]);
+    setUploading(true);
     const result = await directusClient.request(uploadFiles(formData));
+    setUploading(false);
     form.setFieldValue('primary_image', result.id);
   };
 
@@ -200,6 +204,7 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
               {...form.getInputProps('primary_image')}
             />
             <Dropzone
+              loading={uploading}
               onDrop={handleImageUpload}
               multiple={false}
               maxSize={3 * 1024 * 1024}
