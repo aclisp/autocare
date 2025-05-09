@@ -8,7 +8,7 @@ import {
   readItems,
   readMe,
 } from '@directus/sdk';
-import { directusError } from '.';
+import { directusErrorCode } from '.';
 import type { Schema } from './types';
 
 export type User = Exclude<ReturnType<typeof useUser>['user'], undefined>;
@@ -26,7 +26,7 @@ export function useUser() {
   );
   return {
     user: data,
-    error: directusError(error),
+    error: directusErrorCode(error),
     isLoading,
   };
 }
@@ -44,7 +44,7 @@ export function useItems<
   );
   return {
     items: data,
-    error: directusError(error),
+    error: directusErrorCode(error),
     isLoading,
   };
 }
@@ -62,7 +62,7 @@ export function useItem<
   );
   return {
     item: data,
-    error: directusError(error),
+    error: directusErrorCode(error),
     isLoading,
   };
 }

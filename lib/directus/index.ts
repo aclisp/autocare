@@ -1,6 +1,22 @@
 import { isDirectusError } from '@directus/sdk';
 import { DIRECTUS_URL } from './constants';
 
+export function directusErrorCode(e: unknown): string | undefined {
+  if (e === null || e === undefined) {
+    return undefined;
+  }
+  if (typeof e === 'string') {
+    return e;
+  }
+  if (isDirectusError(e)) {
+    return e.errors.map((e) => e.extensions.code).join(' ');
+  }
+  if (isError(e)) {
+    return e.name;
+  }
+  return String(e);
+}
+
 export function directusError(e: unknown): string | undefined {
   if (e === null || e === undefined) {
     return undefined;

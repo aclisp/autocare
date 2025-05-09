@@ -1,5 +1,4 @@
 import { Loading } from '@/components/Loading/Loading';
-import { RequireLogin } from '@/components/RequireLogin/RequireLogin';
 import { directusAsset } from '@/lib/directus';
 import {
   type User,
@@ -37,6 +36,7 @@ import { useRouter } from 'next/navigation';
 import { modals } from '@mantine/modals';
 import type { VehicleOwner } from '@/lib/directus/types';
 import { useEffect, useState } from 'react';
+import { ErrorHandler } from '../ErrorHandler/ErrorHandler';
 
 export function VehicleFormNew() {
   const { user, error, isLoading } = useUser();
@@ -44,7 +44,7 @@ export function VehicleFormNew() {
     return <Loading />;
   }
   if (error) {
-    return <RequireLogin error={error} hint="to add your cars." />;
+    return <ErrorHandler error={error} hint="to add your cars." />;
   }
 
   return (
@@ -64,7 +64,7 @@ export function VehicleFormEdit({ id }: { id: string }) {
     return <Loading />;
   }
   if (error) {
-    return <RequireLogin error={error} hint="to edit your cars." />;
+    return <ErrorHandler error={error} hint="to edit your cars." />;
   }
 
   return (
