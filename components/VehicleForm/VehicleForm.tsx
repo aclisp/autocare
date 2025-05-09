@@ -117,6 +117,7 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
     const values = initializeValues(item);
     form.setInitialValues(values);
     form.setValues(values);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
 
   const primaryImage = form.getValues().primary_image;
@@ -194,6 +195,7 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xl">
           <Stack gap={0}>
             <TextInput
+              size="md"
               withAsterisk
               label="Image"
               description="Automatic license plate recognition by uploading your vehicle's image"
@@ -219,6 +221,7 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
           </Stack>
 
           <TextInput
+            size="md"
             withAsterisk
             label="License Plate"
             description="The vehicle registration plate is required"
@@ -226,18 +229,21 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
             {...form.getInputProps('license_plate')}
           />
           <TextInput
+            size="md"
             label="Make"
             description="The manufacturer or company that makes the vehicle"
             key={form.key('make')}
             {...form.getInputProps('make')}
           />
           <TextInput
+            size="md"
             label="Model"
             description="The specific version or design of the vehicle"
             key={form.key('model')}
             {...form.getInputProps('model')}
           />
           <NumberInput
+            size="md"
             label="Mileage"
             description="The total number of kilometers a vehicle has been driven"
             suffix=" km"
@@ -249,24 +255,28 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
             {...form.getInputProps('mileage')}
           />
           <TextInput
+            size="md"
             label="VIN"
             description="The vehicle identification number"
             key={form.key('vin')}
             {...form.getInputProps('vin')}
           />
           <YearPickerInput
+            size="md"
             label="Year"
             description="Vehicle production year"
             key={form.key('year')}
             {...form.getInputProps('year')}
           />
           <ColorInput
+            size="md"
             label="Color"
             description="Vehicle color"
             key={form.key('color')}
             {...form.getInputProps('color')}
           />
           <DatePickerInput
+            size="md"
             label="Last Service Date"
             description="When it was serviced and maintained"
             key={form.key('last_service_date')}
@@ -287,6 +297,7 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
           )}
           <ActionIcon
             type="submit"
+            disabled={!form.isDirty()}
             loading={form.submitting}
             size={44}
             variant="filled"

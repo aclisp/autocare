@@ -4,19 +4,15 @@ import {
   Anchor,
   Button,
   Checkbox,
-  Divider,
   Group,
   Paper,
   type PaperProps,
   PasswordInput,
   Stack,
-  Text,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
-import { GoogleButton } from '@/components/GoogleButton/GoogleButton';
-import { TwitterButton } from '@/components/TwitterButton/TwitterButton';
 import { directusClient } from '@/lib/directus/client-only';
 import { useRouter } from 'next/navigation';
 import { directusError } from '@/lib/directus';
@@ -59,21 +55,11 @@ export function AuthenticationForm(props: PaperProps) {
 
   return (
     <Paper radius="md" p="xl" withBorder {...props}>
-      <Text size="lg" fw={500}>
-        Welcome friend, {type} with
-      </Text>
-
-      <Group grow mb="md" mt="md">
-        <GoogleButton radius="xl">Google</GoogleButton>
-        <TwitterButton radius="xl">Twitter</TwitterButton>
-      </Group>
-
-      <Divider label="Or continue with email" labelPosition="center" my="lg" />
-
       <form onSubmit={handleSubmit}>
         <Stack>
           {type === 'register' && (
             <TextInput
+              size="md"
               label="Name"
               placeholder="Your name"
               value={form.values.name}
@@ -85,6 +71,7 @@ export function AuthenticationForm(props: PaperProps) {
           )}
 
           <TextInput
+            size="md"
             required
             label="Email"
             placeholder="hello@mantine.dev"
@@ -97,6 +84,7 @@ export function AuthenticationForm(props: PaperProps) {
           />
 
           <PasswordInput
+            size="md"
             required
             label="Password"
             placeholder="Your password"
@@ -134,7 +122,7 @@ export function AuthenticationForm(props: PaperProps) {
               ? 'Already have an account? Login'
               : "Don't have an account? Register"}
           </Anchor>
-          <Button type="submit" radius="xl">
+          <Button variant="default" type="submit" radius="xl">
             {upperFirst(type)}
           </Button>
         </Group>
