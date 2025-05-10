@@ -1,4 +1,4 @@
-import { isDirectusError } from '@directus/sdk';
+import { type AssetsQuery, isDirectusError } from '@directus/sdk';
 import { DIRECTUS_URL } from './constants';
 
 export function directusErrorCode(e: unknown): string | undefined {
@@ -44,6 +44,21 @@ function isError(value: unknown): value is Error {
   return isError;
 }
 
-export function directusAsset(fileId: string) {
-  return `${DIRECTUS_URL}/assets/${fileId}`;
+type DirectusAssetOptions = Extract<AssetsQuery, { key?: never }>;
+
+export function directusAsset(
+  fileId: string,
+  options: DirectusAssetOptions = {},
+) {
+  const searchParams = new URLSearchParams();
+  if (options.quality) {
+    searchParams.set('quality', String(options.quality));
+  }
+  const queryString = searchParams.toString();
+
+  let assetURL = `${DIRECTUS_URL}/assets/${fileId}`;
+  if (queryString) {
+    assetURL += `?${queryString}`;
+  }
+  return assetURL;
 }
