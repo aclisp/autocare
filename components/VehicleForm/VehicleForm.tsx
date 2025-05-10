@@ -19,6 +19,7 @@ import {
   NumberInput,
   Text,
   AspectRatio,
+  Space,
 } from '@mantine/core';
 import {
   Dropzone,
@@ -165,7 +166,6 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
     formData.append('file', files[0]);
     setUploading(true);
     const result = await directusClient.request(uploadFiles(formData));
-    setUploading(false);
     form.setFieldValue('primary_image', result.id);
   };
 
@@ -212,10 +212,16 @@ function VehicleForm({ item, user }: { item?: UserVehicle2; user?: User }) {
               maxSize={3 * 1024 * 1024}
               accept={IMAGE_MIME_TYPE}
             >
-              {primaryImage && (
+              {primaryImage ? (
                 <AspectRatio ratio={1920 / 1080}>
-                  <Image src={directusAsset(primaryImage)} radius="sm" />
+                  <Image
+                    src={directusAsset(primaryImage)}
+                    radius="sm"
+                    onLoad={() => setUploading(false)}
+                  />
                 </AspectRatio>
+              ) : (
+                <Space h={8} />
               )}
             </Dropzone>
           </Stack>
